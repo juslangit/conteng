@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://*.supabase.co wss://*.supabase.co">
+<title>Conteng</title>
+<link rel="stylesheet" href="board.css">
+</head>
+<body>
+<main class="board" id="board">
+  <div class="grab" title="Drag to move"></div>
+  <canvas id="ink"></canvas>
+  <div class="resize" id="resize" title="Drag to resize"></div>
+
+  <div class="status" id="status"><span class="dot"></span><span id="statusText">Connecting…</span></div>
+
+  <div class="empty" id="empty" hidden>
+    <p>No board yet</p>
+    <button type="button" id="emptySetup">Set up a board</button>
+  </div>
+
+  <nav class="bar" id="bar" aria-label="Drawing tools">
+    <div class="colors" id="colors"></div>
+    <span class="sep"></span>
+    <button type="button" class="tool size" id="size" aria-label="Pen size" title="Pen size"><span id="sizeDot"></span></button>
+    <span class="sep"></span>
+    <button type="button" class="tool" id="eraser" aria-label="Eraser" aria-pressed="false" title="Eraser">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 21-4.3-4.3a1 1 0 0 1 0-1.4l9.6-9.6a1 1 0 0 1 1.4 0l5.6 5.6a1 1 0 0 1 0 1.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
+    </button>
+    <button type="button" class="tool" id="undo" aria-label="Undo my last stroke" title="Undo my last stroke">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
+    </button>
+    <button type="button" class="tool" id="clear" aria-label="Clear the board for both of you" title="Clear the board for both of you">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+    </button>
+    <button type="button" class="tool" id="settings" aria-label="Board settings" title="Board settings">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+    </button>
+  </nav>
+
+  <div class="confirm" id="confirm" hidden>
+    <p>Clear the board for both of you?</p>
+    <div><button type="button" id="confirmNo">Keep</button><button type="button" id="confirmYes" class="danger">Clear</button></div>
+  </div>
+</main>
+<script src="config.js"></script>
+<script src="vendor/supabase.js"></script>
+<script src="board.js"></script>
+</body>
+</html>

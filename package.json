@@ -1,0 +1,65 @@
+{
+  "name": "conteng",
+  "productName": "Conteng",
+  "version": "0.1.0",
+  "description": "A little square whiteboard on your desktop that you share with a friend, live, Mac and Windows",
+  "main": "main.js",
+  "author": "Luqman Hakeem",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "electron .",
+    "vendor": "node tools/vendor.js",
+    "postinstall": "node tools/vendor.js",
+    "dist:mac": "node tools/vendor.js && electron-builder --mac dir --publish never && ./tools/sign.sh",
+    "dist:win": "node tools/vendor.js && electron-builder --win nsis --x64 --publish never",
+    "dist": "npm run dist:mac && npm run dist:win",
+    "test": "node tools/sync_test.js"
+  },
+  "build": {
+    "appId": "com.luqmanhakeem.conteng",
+    "productName": "Conteng",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "build/icon.png",
+      "target": [
+        "dir"
+      ],
+      "identity": null,
+      "extendInfo": {
+        "LSUIElement": true
+      }
+    },
+    "win": {
+      "icon": "build/icon.png",
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "artifactName": "Conteng-Setup-${version}.exe"
+    }
+  },
+  "devDependencies": {
+    "electron": "^38.8.6",
+    "electron-builder": "^26.18.0",
+    "playwright-core": "^1.64.1",
+    "@supabase/supabase-js": "^2.118.0"
+  },
+  "allowScripts": {
+    "electron@38.8.6": true
+  }
+}

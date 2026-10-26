@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'">
+<title>Conteng board</title>
+<link rel="stylesheet" href="setup.css">
+</head>
+<body>
+<main>
+  <h1>Your shared board</h1>
+  <p class="lead">You and your friend draw on the same board when you both use the same code.</p>
+
+  <label for="name">Your name</label>
+  <input id="name" name="name" autocomplete="nickname" maxlength="40" placeholder="Luqman…">
+
+  <section class="current" id="current" hidden>
+    <span class="label">This board's code</span>
+    <div class="code"><code id="currentCode"></code><button type="button" id="copy">Copy</button></div>
+    <p class="hint">Send this code to your friend. They paste it under "Join a friend's board".</p>
+  </section>
+
+  <button type="button" class="primary" id="create">Start a new board</button>
+
+  <form id="join">
+    <label for="code">Join a friend's board</label>
+    <div class="row">
+      <input id="code" name="code" autocomplete="off" spellcheck="false" placeholder="conteng-xxxx-xxxx-xxxx…">
+      <button type="submit">Join</button>
+    </div>
+    <p class="error" id="error" role="alert" aria-live="polite"></p>
+  </form>
+</main>
+<script src="setup.js"></script>
+</body>
+</html>
